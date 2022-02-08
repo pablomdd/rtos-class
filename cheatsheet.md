@@ -30,3 +30,13 @@ Execute
 
 Print contents
 `echo $?`
+
+### Step by step compilation
+Preprocessing
+`gcc -E hola.c -o hola.i`
+
+Compile (Assembly code)
+`gcc -S hola.i -o hola.s`
+
+Assemble file (executable, aka Machine code)
+`as hola.s -o hola.o`
