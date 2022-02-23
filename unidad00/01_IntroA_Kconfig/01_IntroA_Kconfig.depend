@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1645588532 source:/home/pablomdd/Documents/GitHub/rtos-class/unidad00/01_IntroA_Kconfig/Ejemplo_1.c
+	<stdio.h>
+
+1645588532 source:/home/pablomdd/Documents/GitHub/rtos-class/unidad00/01_IntroA_Kconfig/Ejemplo_2.c
+	<stdio.h>
+
+1645588532 source:/home/pablomdd/Documents/GitHub/rtos-class/unidad00/01_IntroA_Kconfig/Ejemplo_3.c
+	<stdio.h>
+	<limits.h>
+
