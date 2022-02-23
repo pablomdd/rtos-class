@@ -2,6 +2,6 @@
 # Automatically generated file; DO NOT EDIT.
 # Configuration
 #
-CONFIG_EJEMPLO___I=y
+# CONFIG_EJEMPLO___I is not set
 # CONFIG_EJEMPLO__II is not set
-# CONFIG_EJEMPLO_III is not set
+CONFIG_EJEMPLO_III=y
