@@ -1,0 +1,20 @@
+config EJEMPLO___I
+    bool "Ejemplo 1 programa 'Hola Mundo'"
+    default y
+    help
+      Se selecciona el programa del ejemplo 1 (diapositiva 8)
+
+config EJEMPLO__II
+    bool "Ejemplo 2 programa que usa las funciones printf y scanf"
+    default n
+    help
+      Se selecciona el programa del ejemplo 2 (diapositiva 11)
+
+config EJEMPLO_III
+    bool "Ejemplo 3 programa que muestra el especificador de formato %li (diapositiva 20)"
+    default n
+    help
+      Se selecciona el programa del ejemplo 3. El programa incluye limits.h, 
+      con lo que tiene acceso a las macros ULONG_MAX INT_MIN INT_MAX UINT_MAX LONG_MAX.
+
+
