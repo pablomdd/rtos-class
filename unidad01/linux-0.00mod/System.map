@@ -1,0 +1,72 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000000000000                . = 0x0
+
+.text           0x0000000000000000     0x2000
+ *(.text)
+ .text          0x0000000000000000     0x1a9c boot/head.o
+                0x0000000000000000                startup_32
+                0x0000000000000126                setup_gdt
+                0x000000000000012e                setup_idt
+                0x000000000000014b                rp_sidt
+                0x000000000000015e                set_base
+                0x0000000000000173                write_char
+                0x00000000000001a8                ignore_int
+                0x00000000000001be                timer_interrupt_dumm
+                0x00000000000001c0                timer_interrupt
+                0x0000000000000234                system_interrupt
+                0x000000000000024b                current
+                0x000000000000024f                scr_loc
+                0x0000000000000256                lidt_opcode
+                0x000000000000025e                lgdt_opcode
+                0x0000000000000268                idt
+                0x0000000000000a68                gdt
+                0x0000000000000ab8                end_gdt
+                0x0000000000000cb8                stack_ptr
+                0x0000000000000cc0                ldt0
+                0x0000000000000cd8                tss0
+                0x0000000000000f40                stack0_krn_ptr
+                0x0000000000000f48                ldt1
+                0x0000000000000f60                tss1
+                0x00000000000011c8                stack1_krn_ptr
+                0x00000000000011d0                ldt2
+                0x00000000000011e8                tss2
+                0x0000000000001454                task0
+                0x0000000000001668                stack0_ptr
+                0x000000000000166c                task1
+                0x0000000000001880                stack1_ptr
+                0x0000000000001884                task2
+                0x0000000000001a98                stack2_ptr
+                0x0000000000002000                . = 0x2000
+ *fill*         0x0000000000001a9c      0x564 
+
+.data           0x0000000000002000        0x0
+ *(.data)
+ .data          0x0000000000002000        0x0 boot/head.o
+LOAD boot/head.o
+OUTPUT(tools/system binary)
+
+.bss            0x0000000000002000        0x0
+ .bss           0x0000000000002000        0x0 boot/head.o
+
+.debug_line     0x0000000000000000      0x113
+ .debug_line    0x0000000000000000      0x113 boot/head.o
+
+.debug_info     0x0000000000000000       0x26
+ .debug_info    0x0000000000000000       0x26 boot/head.o
+
+.debug_abbrev   0x0000000000000000       0x14
+ .debug_abbrev  0x0000000000000000       0x14 boot/head.o
+
+.debug_aranges  0x0000000000000000       0x20
+ .debug_aranges
+                0x0000000000000000       0x20 boot/head.o
+
+.debug_str      0x0000000000000000       0x5a
+ .debug_str     0x0000000000000000       0x5a boot/head.o
