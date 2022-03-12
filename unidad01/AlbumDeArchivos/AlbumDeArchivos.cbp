@@ -28,15 +28,43 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Target title="all">
+				<Option output="bin/all/AlbumDeArchivos" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/all/" />
+				<Option object_output="obj/all/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="run_linux-0.00mod">
+				<Option output="bin/run_linux-0.00mod/AlbumDeArchivos" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/run_linux-0.00mod/" />
+				<Option object_output="obj/run_linux-0.00mod/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="boot/boot.s">
-			<Option target="Release" />
+		<Unit filename="linux-0.00mod/boot/boot.s">
+			<Option target="all" />
+			<Option target="run_linux-0.00mod" />
 		</Unit>
-		<Unit filename="boot/head.s">
-			<Option target="Release" />
+		<Unit filename="linux-0.00mod/boot/head.s">
+			<Option target="all" />
+			<Option target="run_linux-0.00mod" />
 		</Unit>
 		<Extensions />
 	</Project>

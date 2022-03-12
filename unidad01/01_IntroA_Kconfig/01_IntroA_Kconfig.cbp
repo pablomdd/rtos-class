@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="01_IntroA_Kconfig" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/01_IntroA_Kconfig" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/01_IntroA_Kconfig" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Ejemplo_1_uClibc">
+				<Option output="01_IntroA_Kconfig" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Linker>
+					<Add option="-static -nostdlib /usr/x86_64-linux-uclibc/usr/lib/crt1.o /usr/x86_64-linux-uclibc/usr/lib/crti.o  /usr/x86_64-linux-uclibc/usr/lib/crtn.o -L/usr/x86_64-linux-uclibc/usr/lib -lc" />
+				</Linker>
+			</Target>
+			<Target title="Ejemplo1">
+				<Option output="bin/Ejemplo1/01_IntroA_Kconfig" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Ejemplo1/" />
+				<Option object_output="obj/Ejemplo1/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-static -nostdlib /usr/x86_64-linux-uclibc/usr/lib/crt1.o /usr/x86_64-linux-uclibc/usr/lib/crti.o  /usr/x86_64-linux-uclibc/usr/lib/crtn.o -L/usr/x86_64-linux-uclibc/usr/lib -lc" />
+				</Linker>
+			</Target>
+			<Target title="Ejemplo2">
+				<Option output="bin/Ejemplo2/01_IntroA_Kconfig" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Ejemplo2/" />
+				<Option object_output="obj/Ejemplo2/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-include include/generated/autoconf.h" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-Wall -nostdlib -s -static" />
+					<Add option="/usr/x86_64-linux-uclibc/usr/lib/crt1.o" />
+					<Add option="/usr/x86_64-linux-uclibc/usr/lib/crti.o" />
+					<Add option="/usr/x86_64-linux-uclibc/usr/lib/crtn.o" />
+					<Add option="-L/usr/x86_64-linux-uclibc/usr/lib -lc" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-include include/generated/autoconf.h" />
+		</Compiler>
+		<Unit filename="Ejemplo_1.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Ejemplo1" />
+			<Option target="Ejemplo2" />
+		</Unit>
+		<Unit filename="Ejemplo_2.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Ejemplo1" />
+			<Option target="Ejemplo2" />
+		</Unit>
+		<Unit filename="Ejemplo_3.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Ejemplo1" />
+			<Option target="Ejemplo2" />
+		</Unit>
+		<Unit filename="Makefile">
+			<Option target="Release" />
+		</Unit>
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
