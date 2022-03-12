@@ -54,17 +54,100 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Target title="Image_linux-0.00">
+				<Option output="bin/Image_linux-0.00/AlbumDeArchivos" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Image_linux-0.00/" />
+				<Option object_output="obj/Image_linux-0.00/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="run_linux-0.00">
+				<Option output="bin/run_linux-0.00/AlbumDeArchivos" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/run_linux-0.00/" />
+				<Option object_output="obj/run_linux-0.00/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="run_MTX4_0">
+				<Option output="bin/run_MTX4_0/AlbumDeArchivos" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/run_MTX4_0/" />
+				<Option object_output="obj/run_MTX4_0/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="run_MTX4_1">
+				<Option output="bin/run_MTX4_1/AlbumDeArchivos" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/run_MTX4_1/" />
+				<Option object_output="obj/run_MTX4_1/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="run_MTX4_2">
+				<Option output="bin/run_MTX4_2/AlbumDeArchivos" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/run_MTX4_2/" />
+				<Option object_output="obj/run_MTX4_2/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Makefile">
+			<Option target="Release" />
+			<Option target="Image_linux-0.00" />
+			<Option target="run_linux-0.00" />
+			<Option target="run_MTX4_0" />
+			<Option target="run_MTX4_1" />
+			<Option target="run_MTX4_2" />
+		</Unit>
 		<Unit filename="linux-0.00mod/boot/boot.s">
 			<Option target="all" />
 			<Option target="run_linux-0.00mod" />
+			<Option target="Image_linux-0.00" />
+			<Option target="run_linux-0.00" />
+			<Option target="run_MTX4_0" />
+			<Option target="run_MTX4_1" />
+			<Option target="run_MTX4_2" />
 		</Unit>
 		<Unit filename="linux-0.00mod/boot/head.s">
 			<Option target="all" />
 			<Option target="run_linux-0.00mod" />
+			<Option target="Image_linux-0.00" />
+			<Option target="run_linux-0.00" />
+			<Option target="run_MTX4_0" />
+			<Option target="run_MTX4_1" />
+			<Option target="run_MTX4_2" />
 		</Unit>
 		<Extensions />
 	</Project>
