@@ -20,6 +20,9 @@ CFLAGSX64	=  -Wall -O -fstrength-reduce -fomit-frame-pointer
 
 CPP	=cpp -nostdinc -Iinclude
 
+MTXLIBSRCC = MTX4_2/MTXLIB.src/bio.c MTX4_2/MTXLIB.src/queue.c \
+             MTX4_2/MTXLIB.src/getc.s MTX4_2/MTXLIB.src/putc.s MTX4_2/MTXLIB.src/setds.s
+
 .c.s:
 	$(CC) $(CFLAGS) \
 	-nostdinc -Iinclude -S -o $*.s $<
@@ -169,4 +172,34 @@ cleanrun_MTX4_1:
 	rm -v MTX4_1/*.o MTX4_1/mtx MTX4_1/mount_point/boot/mtx MTX4_1/booter MTX4_1/mFDimage
 
 # --- MTX4_2/ ---
+
+MTX4_2/mtx:MTX4_2/ts.s MTX4_2/t.c MTX4_2/mtxlib
+	as86 -o MTX4_2/ts.o MTX4_2/ts.s
+	bcc  -o MTX4_2/t.o -c -ansi MTX4_2/t.c
+	ld86 -d -o MTX4_2/mtx MTX4_2/ts.o MTX4_2/t.o MTX4_2/mtxlib /usr/lib/bcc/libc.a
+
+run_MTX4_2:MTX4_2/mtx MTX4_2/booter
+	cp -v MTX4_2/mtx MTX4_2/mount_point/boot/
+#	genext2fs -v -b 1440 -d ./mount_point/  mFDimage
+	genext2fs -b 1440 -d MTX4_2/mount_point/  MTX4_2/mFDimage
+#	dd if=FDimage.img of=mFDimage count=2 conv=notrunc
+	dd if=MTX4_2/booter of=MTX4_2/mFDimage bs=1024 count=1 conv=notrunc
+	qemu-system-i386 -fda MTX4_2/mFDimage -no-fd-bootchk
+
+MTX4_2/booter:MTX4_2/mtxFS/bs.s MTX4_2/mtxFS/bc.c
+	@echo "compiling booter ..."
+	as86 -o MTX4_2/bs.o MTX4_2/mtxFS/bs.s
+	bcc -o MTX4_2/bc.o -c -ansi MTX4_2/mtxFS/bc.c
+	@echo "linking booter ....."
+	ld86 -d -o MTX4_2/booter MTX4_2/bs.o MTX4_2/bc.o /usr/lib/bcc/libc.a
+MTX4_2/mtxlib:$(MTXLIBSRC)
+	cd MTX4_2/MTXLIB.src/ && $(MAKE)
+
+MTX4_2/mFDimage:MTX4_2/mtx MTX4_2/booter
+	cp -v MTX4_2/mtx MTX4_2/mount_point/boot/
+	genext2fs -b 1440 -d MTX4_2/mount_point/  MTX4_2/mFDimage
+	dd if=MTX4_2/booter of=MTX4_2/mFDimage bs=1024 count=1 conv=notrunc
+
+cleanrun_MTX4_2:
+	rm -v MTX4_2/*.o MTX4_2/MTXLIB.src/*.o MTX4_2/mtx MTX4_2/mount_point/boot/mtx MTX4_2/booter MTX4_2/mFDimage MTX4_2/mtxlib
 
