@@ -29,15 +29,15 @@ CPP	=cpp -nostdinc -Iinclude
 	$(CC) $(CFLAGS) \
 	-nostdinc -Iinclude -c -o $*.o $<
 
-all:	Image
+all:	Image Image_linux-00-0
 
 #Image: boot/boot tools/system tools/build
 #	tools/build boot/boot tools/system  > Image
 #	sync
 Image: linux-0.00mod/boot/boot linux-0.00mod/tools/system
-#	genext2fs -b 1440 -d ./mount_point/  Image
-	fallocate  -l 1440k Image
-	mkfs.ext2  -b 1024 -T floppy  Image
+	genext2fs -b 1440 -d ./mount_point/  Image
+#	fallocate  -l 1440k Image
+#	mkfs.ext2  -b 1024 -T floppy  Image
 	dd if=linux-0.00mod/boot/boot of=Image bs=512 count=1 conv=notrunc
 	dd if=linux-0.00mod/tools/system of=Image seek=1 bs=512 conv=notrunc
 	sync
@@ -91,3 +91,30 @@ clean:
 cleanall:
 	rm -vf Image System.map tmp_make core boot/boot System_1.map
 	rm -vf init/*.o linux-0.00mod/tools/system linux-0.00mod/tools/build linux-0.00mod/boot/*.o linux-0.00mod/tools/system_1
+
+cleanrun_linux-0.00mod:
+	rm -vf Image System.map tmp_make core boot/boot System_1.map
+	rm -vf init/*.o linux-0.00mod/tools/system linux-0.00mod/tools/build linux-0.00mod/boot/*.o linux-0.00mod/tools/system_1
+
+# ----linux-0.00----
+Image_linux-0.00: linux-0.00/boot/boot_from_orig_Image linux-0.00/tools/system
+	genext2fs -b 1440 -d ./mount_point/  $@
+	dd if=linux-0.00/boot/boot_from_orig_Image of=$@ bs=512 count=1 conv=notrunc
+	dd if=linux-0.00/tools/system of=$@ seek=1 bs=512 conv=notrunc
+
+linux-0.00/tools/system: linux-0.00/boot/head.s
+	gcc -g -std=gnu99  -nostdlib -m32 -march=i386 -ffreestanding -x assembler-with-cpp -Wl,--nmagic,--oformat=binary -o linux-0.00/boot/head.o -c $<
+	gcc -std=gnu99  -nostdlib -m32 -march=i386 -ffreestanding  -o $@ -Wl,--nmagic,--script=linux-0.00/test1.lds,-Map=System.map,--retain-symbols-file=linux-0.00/filename.rtd linux-0.00/boot/head.o
+
+
+linux-0.00/boot/boot:	linux-0.00/boot/boot.s
+	$(AS86) -o linux-0.00/boot/boot.o linux-0.00/boot/boot.s
+	$(LD86) -s -o linux-0.00/boot/boot linux-0.00/boot/boot.o
+#	$(LD86) -s -M -o boot/boot boot/boot.o
+
+run_linux-0.00: Image_linux-0.00
+	qemu-system-i386 -fda $< -no-fd-bootchk
+
+cleanrun_linux-0.00:
+	rm -vf Image_linux-0.00 System.map tmp_make core boot/boot
+	rm -vf init/*.o linux-0.00/tools/system linux-0.00/tools/build linux-0.00/boot/*.o
