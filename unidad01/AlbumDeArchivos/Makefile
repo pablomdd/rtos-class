@@ -118,3 +118,28 @@ run_linux-0.00: Image_linux-0.00
 cleanrun_linux-0.00:
 	rm -vf Image_linux-0.00 System.map tmp_make core boot/boot
 	rm -vf init/*.o linux-0.00/tools/system linux-0.00/tools/build linux-0.00/boot/*.o
+
+# --- MTX4_0/ ---
+
+MTX4_0/mtx:MTX4_0/ts.s MTX4_0/t.c
+	as86 -o MTX4_0/ts.o MTX4_0/ts.s
+	bcc  -o MTX4_0/t.o -c -ansi MTX4_0/t.c
+	ld86 -d -o MTX4_0/mtx MTX4_0/ts.o MTX4_0/t.o MTX4_0/mtxlib /usr/lib/bcc/libc.a
+
+run_MTX4_0:MTX4_0/mtx MTX4_0/booter
+	cp -v MTX4_0/mtx MTX4_0/mount_point/boot/
+	genext2fs  -b 1440 -d MTX4_0/mount_point/  MTX4_0/mFDimage
+#	dd if=FDimage.img of=mFDimage count=2 conv=notrunc
+	dd if=MTX4_0/booter of=MTX4_0/mFDimage bs=1024 count=1 conv=notrunc
+	qemu-system-i386 -fda MTX4_0/mFDimage -no-fd-bootchk
+
+MTX4_0/booter:MTX4_0/mtxFS/bs.s MTX4_0/mtxFS/bc.c
+	@echo "compiling booter ..."
+	as86 -o MTX4_0/bs.o MTX4_0/mtxFS/bs.s
+	bcc -o MTX4_0/bc.o -c -ansi MTX4_0/mtxFS/bc.c
+	@echo "linking booter ....."
+	ld86 -d -o MTX4_0/booter MTX4_0/bs.o MTX4_0/bc.o /usr/lib/bcc/libc.a
+
+
+cleanrun_MTX4_0:
+	rm -v MTX4_0/*.o MTX4_0/mtx MTX4_0/mount_point/boot/mtx MTX4_0/booter MTX4_0/mFDimage # MTX4_0/loader
