@@ -3,5 +3,6 @@
 	<Workspace title="Workspace">
 		<Project filename="01_IntroA_Kconfig/01_IntroA_Kconfig.cbp" />
 		<Project filename="AlbumDeArchivos/AlbumDeArchivos.cbp" />
+		<Project filename="p1_marteOS/p1_marteOS.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
