@@ -23,7 +23,7 @@ volatile float eprev = 0;
 volatile float eintegral = 0;
 
 // PID constants
-float kp = 0.3;
+float kp = 15;
 float kd = 0.005;
 float ki = 0.003;
 
